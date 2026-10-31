@@ -7,6 +7,7 @@ const cvsRoutes = require('./routes/cvs');
 const templatesRoutes = require('./routes/templates');
 const aiRoutes = require('./routes/ai');
 const atsRoutes = require('./routes/ats');
+const exportRoutes = require('./routes/export');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -21,6 +22,7 @@ app.use('/api/cvs', cvsRoutes);
 app.use('/api/templates', templatesRoutes);
 app.use('/api/ai', aiRoutes);
 app.use('/api/ats', atsRoutes);
+app.use('/api/export', exportRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
