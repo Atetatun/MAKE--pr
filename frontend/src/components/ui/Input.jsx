@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import { forwardRef, cloneElement } from 'react'
 import { clsx } from 'clsx'
 
 /**
@@ -97,6 +97,7 @@ export function FormField({
 }) {
   const errorId = htmlFor ? `${htmlFor}-error` : undefined
   const hintId  = htmlFor ? `${htmlFor}-hint`  : undefined
+  const describedBy = [errorId, hintId].filter(Boolean).join(' ')
 
   return (
     <div className={clsx('flex flex-col gap-1', className)}>
@@ -113,7 +114,7 @@ export function FormField({
       )}
 
       {/* Clone children to inject aria attributes */}
-      {children}
+      {children && cloneElement(children, { 'aria-describedby': describedBy || undefined })}
 
       {hint && !error && (
         <p id={hintId} className="text-caption text-text-muted">
@@ -138,7 +139,7 @@ export function Checkbox({ label, className, ...props }) {
     <label className={clsx('flex items-center gap-2 cursor-pointer', className)}>
       <input
         type="checkbox"
-        className="w-4 h-4 rounded border-slate-300 text-navy focus:ring-cyan focus:ring-2 focus:ring-offset-1"
+        className="w-5 h-5 rounded border-slate-300 text-navy focus:ring-cyan focus:ring-2 focus:ring-offset-1"
         {...props}
       />
       {label && (

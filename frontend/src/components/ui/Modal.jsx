@@ -72,12 +72,23 @@ export function Modal({
       aria-modal="true"
       aria-labelledby={title ? 'modal-title' : undefined}
     >
+      <style>{`
+        @keyframes modalIn {
+          from {
+            opacity: 0;
+            transform: scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
       <div
         className={clsx(
           'bg-white rounded-xl p-8 relative w-full mx-auto',
           maxWidth,
           'shadow-modal',
-          'animate-[modalIn_200ms_ease-out_forwards]',
           className
         )}
         style={{

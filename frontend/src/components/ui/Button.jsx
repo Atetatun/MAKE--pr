@@ -16,7 +16,7 @@ import { clsx } from 'clsx'
 
 const buttonVariants = cva(
   // Base styles
-  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer border-0 font-heading focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-cyan disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
+  'inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer border-0 font-heading focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-cyan disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none',
   {
     variants: {
       variant: {
@@ -63,6 +63,7 @@ export function Button({
     <button
       className={clsx(buttonVariants({ variant, size }), className)}
       disabled={disabled || loading}
+      aria-busy={loading}
       {...props}
     >
       {loading && (
