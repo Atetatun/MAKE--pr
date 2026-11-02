@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3 CV Templates High-Fi Showcase - PortoCraft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --accent-cyan: #0ea5e9;
+      --accent-orange: #f97316;
+      --bg-light: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .header-bar {
+      height: 64px;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+    .template-nav { display: flex; gap: 8px; }
+    .tpl-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+    .tpl-btn:hover { color: #ffffff; border-color: #0ea5e9; }
+    .tpl-btn.active { background: #1e3a8a; color: #ffffff; border-color: #1e3a8a; }
+
+    .canvas-container {
+      flex: 1;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      background: #0b0f19;
+      overflow-y: auto;
+    }
+    .a4-paper {
+      width: 100%;
+      max-width: 800px;
+      min-height: 1100px;
+      background: #ffffff;
+      color: #0f172a;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      border-radius: 4px;
+      padding: 56px 48px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+      display: none;
+    }
+    .a4-paper.active { display: block; }
+
+    /* TEMPLATE 1: PROFESSIONAL */
+    .tpl-pro-name { font-family: 'Inter', sans-serif; font-size: 30px; font-weight: 700; color: #1e3a8a; text-align: center; }
+    .tpl-pro-title { text-align: center; font-size: 14px; font-weight: 600; color: #0ea5e9; margin-top: 4px; }
+    .tpl-pro-contact { text-align: center; font-size: 11.5px; color: #64748b; margin: 10px 0 24px; border-bottom: 2px solid #1e3a8a; padding-bottom: 12px; }
+    .tpl-pro-heading { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.05em; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; margin: 20px 0 10px; }
+    .tpl-item-row { display: flex; justify-content: space-between; font-weight: 600; font-size: 13px; }
+    .tpl-item-sub { color: #64748b; font-size: 12px; margin-bottom: 6px; }
+
+    /* TEMPLATE 2: CREATIVE */
+    .tpl-crea-wrap { display: flex; gap: 32px; min-height: 980px; }
+    .tpl-crea-sidebar { width: 32%; background: #f8fafc; border-right: 1px solid #e2e8f0; margin: -56px 0 -48px -48px; padding: 48px 24px; }
+    .tpl-crea-main { width: 68%; }
+    .crea-avatar { width: 64px; height: 64px; background: #0ea5e9; border-radius: 12px; color: #ffffff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 24px; margin-bottom: 16px; }
+    .crea-sidebar-heading { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #1e3a8a; text-transform: uppercase; letter-spacing: 0.05em; margin: 24px 0 10px; }
+    .crea-pill { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 600; margin: 2px 2px 4px 0; }
+
+    /* TEMPLATE 3: MINIMAL */
+    .tpl-min-name { font-family: 'Inter', sans-serif; font-size: 34px; font-weight: 700; letter-spacing: -0.02em; color: #0f172a; margin-bottom: 4px; }
+    .tpl-min-role { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #64748b; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 32px; }
+    .tpl-min-section { display: grid; grid-template-columns: 140px 1fr; gap: 24px; margin-bottom: 28px; }
+    .tpl-min-sec-title { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.08em; }
+  </style>
+</head>
+<body>
+
+  <header class="header-bar">
+    <div style="font-weight: 700; font-size: 17px; color: #ffffff;">PortoCraft · 3 Templates High-Fidelity Specs</div>
+    <div class="template-nav">
+      <button class="tpl-btn active" onclick="switchTpl('tpl1', this)">1. Professional (ATS 98%)</button>
+      <button class="tpl-btn" onclick="switchTpl('tpl2', this)">2. Creative (Split Layout)</button>
+      <button class="tpl-btn" onclick="switchTpl('tpl3', this)">3. Minimal (Swiss Elegance)</button>
+    </div>
+  </header>
+
+  <main class="canvas-container">
+    <!-- Template 1: Professional -->
+    <div id="tpl1" class="a4-paper active">
+      <h1 class="tpl-pro-name">ALEXANDER PRATAMA</h1>
+      <div class="tpl-pro-title">Senior Software Engineer & Tech Lead</div>
+      <div class="tpl-pro-contact">
+        Jakarta Selatan, Indonesia · +62 812-3456-7890 · alexander.pratama@email.com · linkedin.com/in/alexpratama
+      </div>
+
+      <div class="tpl-pro-heading">Ringkasan Profesional</div>
+      <p style="margin-bottom: 16px;">
+        Senior Software Engineer dengan 6+ tahun rekam jejak memimpin pengembangan platform sistem web skala besar. Berpengalaman dalam modern stack React, TypeScript, Node.js, dan arsitektur microservices AWS. Berhasil menurunkan load time aplikasi sebesar 45% dan membawahi delivery tim beranggotakan 8 engineer secara konsisten.
+      </p>
+
+      <div class="tpl-pro-heading">Pengalaman Kerja</div>
+      <div class="tpl-item-row">
+        <span>Lead Frontend Engineer</span>
+        <span>2022 — Sekarang</span>
+      </div>
+      <div class="tpl-item-sub">Tokopedia (GoTo Group) · Jakarta Selatan</div>
+      <ul style="padding-left: 20px; margin-bottom: 14px;">
+        <li>Memimpin refactoring arsitektur checkout flow dengan React 18 & Vite, meningkatkan Core Web Vitals score ke 96 dan mendongkrak rasio konversi 4.2%.</li>
+        <li>Menginisiasi implementasi Design System tokens lintas tim yang mereduksi waktu implementasi UI oleh tim frontend sebesar 30%.</li>
+      </ul>
+
+      <div class="tpl-item-row">
+        <span>Full Stack Developer</span>
+        <span>2019 — 2022</span>
+      </div>
+      <div class="tpl-item-sub">Bukalapak · Jakarta</div>
+      <ul style="padding-left: 20px; margin-bottom: 14px;">
+        <li>Mengembangkan sistem analytics merchant backend berbasis PostgreSQL & Redis dengan throughput 15.000 transaksi/menit.</li>
+        <li>Membangun pipeline automated CI/CD menggunakan GitHub Actions & Docker yang memangkas waktu deploy dari 45 menit menjadi 8 menit.</li>
+      </ul>
+
+      <div class="tpl-pro-heading">Pendidikan</div>
+      <div class="tpl-item-row">
+        <span>Sarjana Ilmu Komputer (S.Kom)</span>
+        <span>2015 — 2019</span>
+      </div>
+      <div class="tpl-item-sub">Universitas Indonesia (UI) · IPK: 3.82 / 4.00 (Cum Laude)</div>
+
+      <div class="tpl-pro-heading">Keahlian & Kompetensi</div>
+      <p>
+        <strong>Bahasa & Frameworks:</strong> JavaScript, TypeScript, React, Next.js, Node.js, Express, Tailwind CSS<br>
+        <strong>Infrastruktur & Database:</strong> PostgreSQL, Redis, Docker, AWS S3/EC2, CI/CD, Git, Jest
+      </p>
+    </div>
+
+    <!-- Template 2: Creative -->
+    <div id="tpl2" class="a4-paper">
+      <div class="tpl-crea-wrap">
+        <aside class="tpl-crea-sidebar">
+          <div class="crea-avatar">NL</div>
+          <h2 style="font-size: 18px; color: #1e3a8a; font-weight: 700;">Nadia Larasati</h2>
+          <div style="font-size: 12px; color: #0ea5e9; font-weight: 600; margin-bottom: 20px;">Product & Brand Designer</div>
+
+          <div class="crea-sidebar-heading">Kontak</div>
+          <div style="font-size: 11.5px; color: #475569; line-height: 1.8;">
+            nadia.larasati@design.id<br>
+            +62 813-9876-5432<br>
+            Bandung, Indonesia<br>
+            dribbble.com/nadialarasati<br>
+            behance.net/nadia-ux
+          </div>
+
+          <div class="crea-sidebar-heading">Keahlian Utama</div>
+          <div>
+            <span class="crea-pill">UI/UX Design</span>
+            <span class="crea-pill">Design Systems</span>
+            <span class="crea-pill">Figma Tokens</span>
+            <span class="crea-pill">User Research</span>
+            <span class="crea-pill">Prototyping</span>
+            <span class="crea-pill">Tailwind CSS</span>
+          </div>
+
+          <div class="crea-sidebar-heading">Bahasa</div>
+          <div style="font-size: 12px; color: #475569;">
+            Bahasa Indonesia (Native)<br>
+            English (Fluent / Professional)
+          </div>
+        </aside>
+
+        <section class="tpl-crea-main">
+          <h3 style="font-size: 15px; color: #1e3a8a; border-bottom: 2px solid #0ea5e9; padding-bottom: 4px; margin-bottom: 12px; font-weight: 700;">PROFIL SINGKAT</h3>
+          <p style="margin-bottom: 20px;">
+            Product Designer dengan 5+ tahun pengalaman merancang produk digital SaaS B2B dan mobile consumer apps. Berfokus pada perpaduan estetika visual tinggi, sistem desain modular, dan riset pengguna berbasis data.
+          </p>
+
+          <h3 style="font-size: 15px; color: #1e3a8a; border-bottom: 2px solid #0ea5e9; padding-bottom: 4px; margin-bottom: 12px; font-weight: 700;">PENGALAMAN KERJA</h3>
+          <div style="font-weight: 700; color: #0f172a;">Senior Product Designer — FinTech Asia</div>
+          <div style="font-size: 11.5px; color: #0ea5e9; margin-bottom: 6px;">2021 — Sekarang · Jakarta</div>
+          <p style="margin-bottom: 14px;">Memimpin riset dan desain ulang aplikasi mobile onboarding perbankan, meningkatkan completion rate sebesar 32% dalam kuartal pertama rilis.</p>
+
+          <div style="font-weight: 700; color: #0f172a;">UI/UX Designer — Studio Kreasi</div>
+          <div style="font-size: 11.5px; color: #0ea5e9; margin-bottom: 6px;">2019 — 2021 · Bandung</div>
+          <p style="margin-bottom: 14px;">Membangun lebih dari 15 desain aplikasi klien global dengan kepatuhan aksesibilitas WCAG AA 100%.</p>
+
+          <h3 style="font-size: 15px; color: #1e3a8a; border-bottom: 2px solid #0ea5e9; padding-bottom: 4px; margin-bottom: 12px; font-weight: 700;">PORTOFOLIO PILIHAN</h3>
+          <p><strong>FinPay Design System:</strong> Komponen Figma komprehensif 120+ varian terhubung ke token React Tailwind.</p>
+        </section>
+      </div>
+    </div>
+
+    <!-- Template 3: Minimal -->
+    <div id="tpl3" class="a4-paper">
+      <div class="tpl-min-name">Bima Sutanto</div>
+      <div class="tpl-min-role">System Architect & Distributed Systems Specialist</div>
+
+      <div class="tpl-min-section">
+        <div class="tpl-min-sec-title">Contact</div>
+        <div>
+          bima.sutanto@architect.io · +62 811-2233-4455 · github.com/bimasutanto · Jakarta
+        </div>
+      </div>
+
+      <div class="tpl-min-section">
+        <div class="tpl-min-sec-title">Profile</div>
+        <div>
+          Principal Software Architect specializing in fault-tolerant distributed ledger architectures, high-concurrency event sourcing, and cloud-native Kubernetes infrastructures.
+        </div>
+      </div>
+
+      <div class="tpl-min-section">
+        <div class="tpl-min-sec-title">Experience</div>
+        <div>
+          <div style="font-weight: 700; margin-bottom: 2px;">Principal Systems Architect — Alpha Distributed Labs</div>
+          <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">2021 — PRESENT</div>
+          <p style="margin-bottom: 16px;">Architected ultra-low latency transaction processing engine capable of settling 100,000 TPS with 99.999% availability SLA.</p>
+
+          <div style="font-weight: 700; margin-bottom: 2px;">Senior Infrastructure Engineer — CloudNexus</div>
+          <div style="font-size: 12px; color: #64748b; margin-bottom: 6px;">2017 — 2021</div>
+          <p>Designed multi-region disaster recovery replication on AWS and GCP, reducing RTO to zero seconds.</p>
+        </div>
+      </div>
+
+      <div class="tpl-min-section">
+        <div class="tpl-min-sec-title">Expertise</div>
+        <div>
+          Go, Rust, Distributed Consensus (Raft), Kubernetes, Kafka, PostgreSQL, Zero-Knowledge Proofs
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function switchTpl(id, btn) {
+      document.querySelectorAll('.tpl-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.a4-paper').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

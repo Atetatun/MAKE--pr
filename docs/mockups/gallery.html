@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Template Gallery - PortoCraft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #172554;
+      --accent-cyan: #0ea5e9;
+      --accent-cyan-hover: #0284c7;
+      --accent-orange: #f97316;
+      --bg-light: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, .btn { font-family: 'Inter', sans-serif; }
+
+    /* Header */
+    .header {
+      height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: #334155; font-size: 15px; font-weight: 500; }
+    .nav-links a.active { color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--accent-cyan); padding-bottom: 4px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 150ms ease;
+      border: none;
+    }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); }
+    .btn-secondary:hover { background: #f1f5f9; }
+    .btn-outline-white { background: rgba(255, 255, 255, 0.95); border: 1px solid var(--border-light); color: var(--text-primary); }
+    .btn-outline-white:hover { background: #ffffff; }
+
+    /* Gallery Container */
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .gallery-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .gallery-header h1 {
+      font-size: 38px;
+      color: var(--primary);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .gallery-header p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Filters Bar */
+    .filter-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      padding: 8px 20px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+      cursor: pointer;
+      transition: all 150ms ease;
+    }
+    .filter-pill:hover { border-color: var(--accent-cyan); color: var(--primary); }
+    .filter-pill.active { background: var(--primary); color: #ffffff; border-color: var(--primary); }
+
+    /* Template Cards Grid (3 Columns) */
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .template-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.05);
+      transition: all 250ms cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .template-card:hover {
+      box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+      transform: translateY(-6px);
+      border-color: #cbd5e1;
+    }
+    .template-preview-box {
+      height: 380px;
+      background: #f1f5f9;
+      border-bottom: 1px solid var(--border-light);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    /* Simulated Miniature Document Preview */
+    .mini-doc {
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      border-radius: 6px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      font-size: 8px;
+      color: #334155;
+      overflow: hidden;
+    }
+    .mini-header { border-bottom: 1.5px solid var(--primary); padding-bottom: 6px; margin-bottom: 8px; }
+    .mini-name { font-size: 12px; font-weight: 700; color: var(--primary); }
+    .mini-title { font-size: 9px; color: var(--accent-cyan); margin-bottom: 4px; }
+    .mini-bar { height: 4px; background: #e2e8f0; border-radius: 2px; margin-bottom: 5px; }
+    .mini-bar.dark { background: var(--primary); width: 35%; height: 6px; }
+
+    /* Overlay Hover Action */
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      opacity: 0;
+      transition: opacity 200ms ease;
+    }
+    .template-card:hover .preview-overlay { opacity: 1; }
+
+    .template-info { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .template-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .template-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      background: #eff6ff;
+      color: var(--primary);
+    }
+    .ats-score-pill {
+      font-size: 12px;
+      font-weight: 700;
+      color: #166534;
+      background: #dcfce7;
+      padding: 3px 8px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .template-title { font-size: 20px; color: var(--primary); margin-bottom: 6px; }
+    .template-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; flex: 1; }
+    .template-actions { display: flex; gap: 10px; }
+
+    /* Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal-box {
+      background: #ffffff;
+      width: 90%;
+      max-width: 720px;
+      border-radius: 12px;
+      padding: 32px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+    }
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 900px) {
+      .templates-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .header { padding: 0 20px; }
+      .templates-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="landing.html" class="brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+      </svg>
+      PortoCraft
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="landing.html">Beranda</a></li>
+      <li><a href="gallery.html" class="active">Template Gallery</a></li>
+      <li><a href="cv-builder.html">CV Builder</a></li>
+      <li><a href="dashboard.html">Dashboard</a></li>
+    </ul>
+
+    <div>
+      <a href="cv-builder.html" class="btn btn-primary">+ Buat CV Baru</a>
+    </div>
+  </header>
+
+  <main class="gallery-container">
+    <div class="gallery-header">
+      <h1>Galeri Template CV Profesional</h1>
+      <p>Pilih template standar industri yang sesuai dengan jalur karirmu. Semua template sudah dioptimalkan untuk seleksi ATS.</p>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="filter-tabs">
+      <button class="filter-pill active">Semua Template (3)</button>
+      <button class="filter-pill">⭐ Paling Populer</button>
+      <button class="filter-pill">🏢 Korporat & ATS</button>
+      <button class="filter-pill">🎨 Desain & Kreatif</button>
+      <button class="filter-pill">📄 Minimalis</button>
+    </div>
+
+    <!-- Template Grid -->
+    <div class="templates-grid">
+      <!-- Card 1: Professional -->
+      <div class="template-card">
+        <div class="template-preview-box">
+          <div class="mini-doc">
+            <div class="mini-header">
+              <div class="mini-name">ALEXANDER PRATAMA</div>
+              <div class="mini-title">Senior Software Engineer · Jakarta</div>
+            </div>
+            <div class="mini-bar dark"></div>
+            <div class="mini-bar" style="width: 80%;"></div>
+            <div class="mini-bar" style="width: 90%;"></div>
+            <div style="height: 10px;"></div>
+            <div class="mini-bar dark" style="width: 45%;"></div>
+            <div class="mini-bar" style="width: 75%;"></div>
+            <div class="mini-bar" style="width: 85%;"></div>
+          </div>
+          <div class="preview-overlay">
+            <button class="btn btn-outline-white" onclick="openModal('Professional', 'Format standar korporat dengan tata letak kronologis yang memiliki tingkat kelulusan ATS 98%. Sangat disukai oleh perusahaan Fortune 500 dan perbankan.')">🔍 Pratinjau Cepat</button>
+            <a href="cv-builder.html?template=professional" class="btn btn-primary">Gunakan Template Ini</a>
+          </div>
+        </div>
+        <div class="template-info">
+          <div class="template-meta">
+            <span class="template-tag">Korporat / Tech</span>
+            <span class="ats-score-pill">✓ ATS 98%</span>
+          </div>
+          <h2 class="template-title">Professional</h2>
+          <p class="template-desc">Desain formal single-column klasik dengan aksen Deep Navy. Dioptimalkan penuh untuk scanner ATS perusahaan besar.</p>
+          <div class="template-actions">
+            <a href="cv-builder.html?template=professional" class="btn btn-primary" style="flex: 1;">Gunakan Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2: Creative -->
+      <div class="template-card">
+        <div class="template-preview-box">
+          <div class="mini-doc" style="display: flex; flex-direction: row; gap: 8px;">
+            <div style="width: 35%; background: #f1f5f9; padding: 6px; border-radius: 4px;">
+              <div style="width: 24px; height: 24px; background: var(--accent-cyan); border-radius: 50%; margin-bottom: 6px;"></div>
+              <div class="mini-bar" style="width: 100%;"></div>
+              <div class="mini-bar" style="width: 80%;"></div>
+            </div>
+            <div style="width: 65%;">
+              <div class="mini-name" style="font-size: 11px;">NADIA LARASATI</div>
+              <div class="mini-title">Product & Brand Designer</div>
+              <div class="mini-bar dark" style="background: var(--accent-cyan); width: 60%;"></div>
+              <div class="mini-bar" style="width: 95%;"></div>
+              <div class="mini-bar" style="width: 85%;"></div>
+            </div>
+          </div>
+          <div class="preview-overlay">
+            <button class="btn btn-outline-white" onclick="openModal('Creative', 'Tata letak split 2 kolom yang dinamis dengan sidebar keahlian dan portfolio link. Cocok untuk bidang industri kreatif dan digital.')">🔍 Pratinjau Cepat</button>
+            <a href="cv-builder.html?template=creative" class="btn btn-primary">Gunakan Template Ini</a>
+          </div>
+        </div>
+        <div class="template-info">
+          <div class="template-meta">
+            <span class="template-tag">Desain & Kreatif</span>
+            <span class="ats-score-pill">✓ ATS 90%</span>
+          </div>
+          <h2 class="template-title">Creative</h2>
+          <p class="template-desc">Layout 2-kolom modern dengan sidebar portofolio & aksen Cyan. Sempurna untuk UI/UX designer, developer, dan marketer.</p>
+          <div class="template-actions">
+            <a href="cv-builder.html?template=creative" class="btn btn-primary" style="flex: 1;">Gunakan Template</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3: Minimal -->
+      <div class="template-card">
+        <div class="template-preview-box">
+          <div class="mini-doc" style="padding: 24px;">
+            <div style="font-size: 14px; font-weight: 700; color: #0f172a; margin-bottom: 4px;">BIMA SUTANTO</div>
+            <div style="font-size: 8px; color: #64748b; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px;">SYSTEM ARCHITECT</div>
+            <div style="display: flex; gap: 8px; margin-bottom: 6px;">
+              <div style="width: 30px; font-size: 7px; color: #94a3b8;">2022 - NOW</div>
+              <div style="flex: 1;">
+                <div class="mini-bar" style="width: 70%;"></div>
+                <div class="mini-bar" style="width: 90%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="preview-overlay">
+            <button class="btn btn-outline-white" onclick="openModal('Minimal', 'Gaya tipografi Swiss dengan whitespace luas dan struktur hanging indent yang bersih dan tanpa distraksi visual.')">🔍 Pratinjau Cepat</button>
+            <a href="cv-builder.html?template=minimal" class="btn btn-primary">Gunakan Template Ini</a>
+          </div>
+        </div>
+        <div class="template-info">
+          <div class="template-meta">
+            <span class="template-tag">Eksekutif / Peneliti</span>
+            <span class="ats-score-pill">✓ ATS 99%</span>
+          </div>
+          <h2 class="template-title">Minimal</h2>
+          <p class="template-desc">Elegan, tipografi kuat dengan whitespace luas bergaya Swiss design. Sangat disukai oleh para eksekutif dan tech leads.</p>
+          <div class="template-actions">
+            <a href="cv-builder.html?template=minimal" class="btn btn-primary" style="flex: 1;">Gunakan Template</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Preview Modal -->
+  <div id="previewModal" class="modal-backdrop" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h2 id="modalTitle" style="color: var(--primary); margin-bottom: 12px;">Template Preview</h2>
+      <p id="modalDesc" style="color: var(--text-muted); margin-bottom: 24px; font-size: 15px;"></p>
+      <div style="height: 240px; background: #f8fafc; border: 1px dashed var(--border-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); margin-bottom: 24px;">
+        Pratinjau Resolusi Tinggi Rendered Live
+      </div>
+      <div style="display: flex; justify-content: flex-end; gap: 12px;">
+        <button class="btn btn-secondary" onclick="closeModal()">Tutup</button>
+        <a id="modalAction" href="cv-builder.html" class="btn btn-primary">Pakai Template Ini</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openModal(title, desc) {
+      document.getElementById('modalTitle').innerText = 'Template ' + title;
+      document.getElementById('modalDesc').innerText = desc;
+      document.getElementById('modalAction').href = 'cv-builder.html?template=' + title.toLowerCase();
+      document.getElementById('previewModal').classList.add('open');
+    }
+    function closeModal() {
+      document.getElementById('previewModal').classList.remove('open');
+    }
+  </script>
+
+</body>
+</html>

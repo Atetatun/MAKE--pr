@@ -1,0 +1,127 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/draft-v1.json",
+  "name": "PortoCraft Design Tokens",
+  "version": "1.0.0",
+  "author": "Anggrea (Design Lead)",
+  "color": {
+    "primary": {
+      "navy": { "value": "#1e3a8a", "type": "color", "description": "Primary titles, CTAs, headers" },
+      "navyHover": { "value": "#172554", "type": "color" },
+      "navyDark": { "value": "#0f172a", "type": "color" }
+    },
+    "accent": {
+      "cyan": { "value": "#0ea5e9", "type": "color", "description": "Highlights, hover, focus rings, progress" },
+      "cyanHover": { "value": "#0284c7", "type": "color" },
+      "cyanLight": { "value": "#e0f2fe", "type": "color" },
+      "orange": { "value": "#f97316", "type": "color", "description": "Secondary accent, warnings, badges" },
+      "orangeHover": { "value": "#ea580c", "type": "color" },
+      "orangeLight": { "value": "#ffedd5", "type": "color" }
+    },
+    "neutral": {
+      "white": { "value": "#ffffff", "type": "color" },
+      "slate50": { "value": "#f8fafc", "type": "color", "description": "Canvas background" },
+      "slate100": { "value": "#f1f5f9", "type": "color", "description": "Secondary background" },
+      "slate200": { "value": "#e2e8f0", "type": "color", "description": "Borders & dividers" },
+      "slate300": { "value": "#cbd5e1", "type": "color", "description": "Input borders" },
+      "slate400": { "value": "#94a3b8", "type": "color", "description": "Placeholder text" },
+      "slate500": { "value": "#64748b", "type": "color", "description": "Muted text" },
+      "slate600": { "value": "#475569", "type": "color", "description": "Secondary body text" },
+      "slate700": { "value": "#334155", "type": "color" },
+      "slate800": { "value": "#1e293b", "type": "color" },
+      "slate900": { "value": "#0f172a", "type": "color", "description": "Primary text" },
+      "black": { "value": "#000000", "type": "color" }
+    },
+    "semantic": {
+      "textPrimary": { "value": "#0f172a", "type": "color" },
+      "textMuted": { "value": "#64748b", "type": "color" },
+      "border": { "value": "#e2e8f0", "type": "color" },
+      "bgLight": { "value": "#f8fafc", "type": "color" },
+      "success": { "value": "#22c55e", "type": "color" },
+      "successBg": { "value": "#dcfce7", "type": "color" },
+      "warning": { "value": "#eab308", "type": "color" },
+      "warningBg": { "value": "#fef9c3", "type": "color" },
+      "error": { "value": "#ef4444", "type": "color" },
+      "errorBg": { "value": "#fee2e2", "type": "color" }
+    }
+  },
+  "typography": {
+    "fontFamilies": {
+      "heading": { "value": "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "type": "fontFamily" },
+      "body": { "value": "'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif", "type": "fontFamily" },
+      "mono": { "value": "'JetBrains Mono', 'Courier New', monospace", "type": "fontFamily" }
+    },
+    "fontWeights": {
+      "regular": { "value": 400, "type": "fontWeight" },
+      "medium": { "value": 500, "type": "fontWeight" },
+      "semibold": { "value": 600, "type": "fontWeight" },
+      "bold": { "value": 700, "type": "fontWeight" }
+    },
+    "fontSizes": {
+      "display": { "value": "72px", "point": "54pt", "type": "fontSize" },
+      "hero": { "value": "56px", "point": "42pt", "type": "fontSize" },
+      "section": { "value": "37px", "point": "28pt", "type": "fontSize" },
+      "subtitle": { "value": "32px", "point": "24pt", "type": "fontSize" },
+      "h3": { "value": "26px", "point": "20pt", "type": "fontSize" },
+      "bodyLarge": { "value": "24px", "point": "18pt", "type": "fontSize" },
+      "body": { "value": "21px", "point": "16pt", "type": "fontSize" },
+      "bodySmall": { "value": "18px", "point": "14pt", "type": "fontSize" },
+      "caption": { "value": "16px", "point": "12pt", "type": "fontSize" },
+      "mono": { "value": "17px", "point": "13pt", "type": "fontSize" }
+    },
+    "lineHeights": {
+      "tight": { "value": "1.2", "type": "lineHeight" },
+      "snug": { "value": "1.3", "type": "lineHeight" },
+      "normal": { "value": "1.5", "type": "lineHeight" },
+      "relaxed": { "value": "1.6", "type": "lineHeight" }
+    },
+    "letterSpacing": {
+      "tighter": { "value": "-0.025em", "type": "letterSpacing" },
+      "tight": { "value": "-0.015em", "type": "letterSpacing" },
+      "normal": { "value": "0", "type": "letterSpacing" },
+      "wide": { "value": "0.025em", "type": "letterSpacing" }
+    }
+  },
+  "spacing": {
+    "base": { "value": "8px", "type": "spacing" },
+    "0.5": { "value": "4px", "type": "spacing" },
+    "1": { "value": "8px", "type": "spacing" },
+    "1.5": { "value": "12px", "type": "spacing" },
+    "2": { "value": "16px", "type": "spacing" },
+    "3": { "value": "24px", "type": "spacing" },
+    "4": { "value": "32px", "type": "spacing" },
+    "6": { "value": "48px", "type": "spacing" },
+    "8": { "value": "64px", "type": "spacing" },
+    "12": { "value": "96px", "type": "spacing" }
+  },
+  "borderRadius": {
+    "none": { "value": "0px", "type": "borderRadius" },
+    "sm": { "value": "4px", "type": "borderRadius" },
+    "md": { "value": "8px", "type": "borderRadius", "description": "Standard components" },
+    "lg": { "value": "12px", "type": "borderRadius", "description": "Modals, large cards" },
+    "full": { "value": "9999px", "type": "borderRadius", "description": "Pills, avatars" }
+  },
+  "boxShadow": {
+    "sm": { "value": "0 1px 2px 0 rgba(15, 23, 42, 0.05)", "type": "boxShadow" },
+    "md": { "value": "0 4px 6px -1px rgba(15, 23, 42, 0.1), 0 2px 4px -2px rgba(15, 23, 42, 0.1)", "type": "boxShadow" },
+    "lg": { "value": "0 10px 15px -3px rgba(15, 23, 42, 0.1), 0 4px 6px -4px rgba(15, 23, 42, 0.1)", "type": "boxShadow" },
+    "xl": { "value": "0 20px 25px -5px rgba(15, 23, 42, 0.15), 0 8px 10px -6px rgba(15, 23, 42, 0.1)", "type": "boxShadow" }
+  },
+  "layout": {
+    "headerHeight": { "value": "64px" },
+    "containerMaxWidth": { "value": "1280px" },
+    "builderMaxWidth": { "value": "1440px" },
+    "builderLeftColWidth": { "value": "45%" },
+    "builderRightColWidth": { "value": "55%" }
+  },
+  "breakpoints": {
+    "mobile": { "value": "320px", "type": "breakpoint" },
+    "tablet": { "value": "640px", "type": "breakpoint" },
+    "desktop": { "value": "1024px", "type": "breakpoint" },
+    "wide": { "value": "1440px", "type": "breakpoint" }
+  },
+  "transitions": {
+    "quick": { "value": "150ms ease-out" },
+    "normal": { "value": "200ms cubic-bezier(0.16, 1, 0.3, 1)" },
+    "slow": { "value": "300ms ease-in-out" }
+  }
+}

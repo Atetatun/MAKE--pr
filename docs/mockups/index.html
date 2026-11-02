@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortoCraft - Design System & High-Fi Mockups Showcase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-navy: #1e3a8a;
+      --accent-cyan: #0ea5e9;
+      --accent-orange: #f97316;
+      --bg-light: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --status-success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    /* Top Toolbar */
+    .top-bar {
+      height: 64px;
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    .brand-badge {
+      background: rgba(14, 165, 233, 0.2);
+      color: #38bdf8;
+      border: 1px solid #0ea5e9;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .nav-tabs {
+      display: flex;
+      gap: 4px;
+      background: #0f172a;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 150ms ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .tab-btn:hover { color: #ffffff; background: rgba(255, 255, 255, 0.05); }
+    .tab-btn.active { background: #1e3a8a; color: #ffffff; }
+
+    .device-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .device-btn {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 150ms ease;
+    }
+    .device-btn:hover { color: #ffffff; border-color: #0ea5e9; }
+    .device-btn.active { background: #0ea5e9; color: #ffffff; border-color: #0ea5e9; }
+    .open-external-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #cbd5e1;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      text-decoration: none;
+      transition: all 150ms ease;
+    }
+    .open-external-btn:hover { background: #334155; color: #ffffff; }
+
+    /* Frame Wrapper */
+    .viewport-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 24px;
+      overflow: auto;
+      background: #090d16;
+    }
+    .mockup-frame {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      border: 1px solid #334155;
+      transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+      height: calc(100vh - 112px);
+      overflow: hidden;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <div class="brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span>PortoCraft</span>
+      <span class="brand-badge">Anggrea Phase 1 Deliverables</span>
+    </div>
+
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="loadMockup('landing.html', this)">1. Landing Page</button>
+      <button class="tab-btn" onclick="loadMockup('gallery.html', this)">2. Template Gallery</button>
+      <button class="tab-btn" onclick="loadMockup('cv-builder.html', this)">3. CV Builder (2-Col)</button>
+      <button class="tab-btn" onclick="loadMockup('dashboard.html', this)">4. Dashboard</button>
+      <button class="tab-btn" onclick="loadMockup('templates.html', this)">5. 3 CV Templates</button>
+      <button class="tab-btn" onclick="loadMockup('components.html', this)">Component Specs</button>
+    </nav>
+
+    <div class="device-controls">
+      <button class="device-btn active" onclick="setDevice('100%', this)">Desktop (Full)</button>
+      <button class="device-btn" onclick="setDevice('768px', this)">Tablet (768px)</button>
+      <button class="device-btn" onclick="setDevice('390px', this)">Mobile (390px)</button>
+      <a id="externalLink" href="landing.html" target="_blank" class="open-external-btn">↗ Buka Standalone</a>
+    </div>
+  </header>
+
+  <main class="viewport-container">
+    <div id="frameWrapper" class="mockup-frame">
+      <iframe id="mockupFrame" src="landing.html" title="Mockup Preview Frame"></iframe>
+    </div>
+  </main>
+
+  <script>
+    function loadMockup(url, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('mockupFrame').src = url;
+      document.getElementById('externalLink').href = url;
+    }
+
+    function setDevice(width, btn) {
+      document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const wrapper = document.getElementById('frameWrapper');
+      wrapper.style.width = width;
+    }
+  </script>
+</body>
+</html>

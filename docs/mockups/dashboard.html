@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard & My Projects - PortoCraft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-hover: #172554;
+      --accent-cyan: #0ea5e9;
+      --accent-orange: #f97316;
+      --bg-light: #f8fafc;
+      --text-primary: #0f172a;
+      --text-muted: #64748b;
+      --border-light: #e2e8f0;
+      --success: #22c55e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: var(--bg-light);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4, .btn { font-family: 'Inter', sans-serif; }
+
+    /* Header */
+    .header {
+      height: 64px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { text-decoration: none; color: #334155; font-size: 15px; font-weight: 500; }
+    .nav-links a.active { color: var(--primary); font-weight: 600; border-bottom: 2px solid var(--accent-cyan); padding-bottom: 4px; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 9px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 150ms ease;
+      border: none;
+    }
+    .btn-primary { background: var(--primary); color: #ffffff; }
+    .btn-primary:hover { background: var(--primary-hover); }
+    .btn-secondary { background: #ffffff; border: 1px solid var(--border-light); color: var(--text-primary); }
+    .btn-secondary:hover { background: #f8fafc; }
+    .btn-danger-ghost { background: transparent; color: #ef4444; }
+    .btn-danger-ghost:hover { background: #fee2e2; }
+
+    /* Container */
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    /* Stats Strip */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 10px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    }
+    .stat-label { font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+    .stat-number { font-size: 26px; font-weight: 700; color: var(--primary); }
+
+    /* Projects Section Header */
+    .section-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .section-header-row h1 { font-size: 24px; color: var(--primary); }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    /* Create New Card (Prominent CTA) */
+    .create-card {
+      background: #ffffff;
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      min-height: 240px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      text-decoration: none;
+      color: var(--primary);
+      transition: all 200ms ease;
+    }
+    .create-card:hover {
+      border-color: var(--accent-cyan);
+      background: #f0f9ff;
+      transform: translateY(-2px);
+    }
+    .create-icon {
+      width: 48px;
+      height: 48px;
+      background: #eff6ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: var(--primary);
+    }
+
+    /* Existing Project Card */
+    .project-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+      transition: all 200ms ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .project-card:hover {
+      box-shadow: 0 10px 20px rgba(15, 23, 42, 0.08);
+      transform: translateY(-3px);
+    }
+    .project-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 12px;
+    }
+    .project-title { font-size: 18px; color: var(--primary); margin-bottom: 4px; }
+    .project-meta { font-size: 13px; color: var(--text-muted); }
+    .ats-chip {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #dcfce7;
+      color: #166534;
+    }
+    .template-badge {
+      display: inline-block;
+      font-size: 12px;
+      padding: 2px 8px;
+      background: #f1f5f9;
+      color: #475569;
+      border-radius: 4px;
+      margin: 12px 0 18px;
+    }
+    .project-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      border-top: 1px solid var(--border-light);
+      padding-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .header { padding: 0 20px; }
+      .stats-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <a href="landing.html" class="brand">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+      </svg>
+      PortoCraft
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="landing.html">Beranda</a></li>
+      <li><a href="gallery.html">Template Gallery</a></li>
+      <li><a href="cv-builder.html">CV Builder</a></li>
+      <li><a href="dashboard.html" class="active">Dashboard</a></li>
+    </ul>
+
+    <div>
+      <a href="gallery.html" class="btn btn-primary">+ Buat CV Baru</a>
+    </div>
+  </header>
+
+  <main class="dashboard-container">
+    <!-- Quick Statistics -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Total CV Dibuat</div>
+          <div class="stat-number">3 Dokumen</div>
+        </div>
+        <div style="font-size: 32px;">📑</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Rata-rata Skor ATS</div>
+          <div class="stat-number" style="color: #16a34a;">94 / 100</div>
+        </div>
+        <div style="font-size: 32px;">🛡️</div>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="stat-label">Total Ekspor PDF</div>
+          <div class="stat-number">12 Kali</div>
+        </div>
+        <div style="font-size: 32px;">⬇️</div>
+      </div>
+    </div>
+
+    <div class="section-header-row">
+      <h1>Project CV Saya</h1>
+      <a href="gallery.html" class="btn btn-primary">+ Buat CV dari Template</a>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid">
+      <!-- Card: New Project CTA -->
+      <a href="gallery.html" class="create-card">
+        <div class="create-icon">+</div>
+        <strong style="font-size: 16px;">Buat CV Baru</strong>
+        <span style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">Pilih dari 3 template ATS</span>
+      </a>
+
+      <!-- Card 1 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <h2 class="project-title">CV Alexander - Tech Lead</h2>
+            <div class="project-meta">Diedit 15 menit yang lalu</div>
+          </div>
+          <span class="ats-chip">ATS 94%</span>
+        </div>
+        <div>
+          <span class="template-badge">Template: Professional</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Target: Perusahaan Enterprise & Multinational FinTech.</p>
+        <div class="project-actions">
+          <a href="cv-builder.html?id=1" class="btn btn-primary" style="flex: 1;">Edit di Builder</a>
+          <button class="btn btn-secondary">⬇ PDF</button>
+          <button class="btn btn-danger-ghost">🗑</button>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <h2 class="project-title">CV Nadia - Product Design</h2>
+            <div class="project-meta">Diedit kemarin</div>
+          </div>
+          <span class="ats-chip">ATS 90%</span>
+        </div>
+        <div>
+          <span class="template-badge">Template: Creative</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Target: Design Agency & Global SaaS Startups.</p>
+        <div class="project-actions">
+          <a href="cv-builder.html?id=2" class="btn btn-primary" style="flex: 1;">Edit di Builder</a>
+          <button class="btn btn-secondary">⬇ PDF</button>
+          <button class="btn btn-danger-ghost">🗑</button>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="project-card">
+        <div class="project-top">
+          <div>
+            <h2 class="project-title">CV Bima - System Architect</h2>
+            <div class="project-meta">Diedit 3 hari lalu</div>
+          </div>
+          <span class="ats-chip">ATS 99%</span>
+        </div>
+        <div>
+          <span class="template-badge">Template: Minimal</span>
+        </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">Target: Academic, Principal R&D role.</p>
+        <div class="project-actions">
+          <a href="cv-builder.html?id=3" class="btn btn-primary" style="flex: 1;">Edit di Builder</a>
+          <button class="btn btn-secondary">⬇ PDF</button>
+          <button class="btn btn-danger-ghost">🗑</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
