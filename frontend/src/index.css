@@ -1,0 +1,397 @@
+/* PortoCraft - Global CSS */
+/* Design System CSS Variables (from design-system.md) */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   CSS Custom Properties (Design Tokens)
+   ============================================ */
+:root {
+  /* Colors */
+  --color-navy: #1e3a8a;
+  --color-navy-dark: #162e6e;
+  --color-cyan: #0ea5e9;
+  --color-orange: #f97316;
+  --color-bg-light: #f8fafc;
+  --color-text-primary: #0f172a;
+  --color-text-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-success: #22c55e;
+  --color-warning: #eab308;
+  --color-error: #ef4444;
+
+  /* Spacing Unit */
+  --spacing-unit: 8px;
+
+  /* Typography */
+  --font-heading: 'Inter', 'Helvetica Neue', Arial, system-ui, sans-serif;
+  --font-body: 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-large: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --transition-quick: 150ms ease-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-light);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
+
+  a {
+    color: var(--color-navy);
+    text-decoration: none;
+    transition: color var(--transition-quick), text-decoration var(--transition-quick);
+  }
+
+  a:hover {
+    color: var(--color-cyan);
+    text-decoration: underline;
+  }
+
+  /* Focus ring - WCAG AA compliant */
+  :focus-visible {
+    outline: 3px solid var(--color-cyan);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+}
+
+/* ============================================
+   Component Layer
+   ============================================ */
+@layer components {
+  /* Buttons */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 font-semibold rounded-lg transition-all duration-200 cursor-pointer border-0;
+    font-family: var(--font-heading);
+  }
+
+  .btn:disabled {
+    @apply opacity-50 cursor-not-allowed pointer-events-none;
+  }
+
+  /* Button Variants */
+  .btn-primary {
+    @apply btn bg-navy text-white hover:bg-navy-dark active:bg-navy-dark;
+    box-shadow: 0 1px 2px rgba(30, 58, 138, 0.3);
+  }
+
+  .btn-primary:hover {
+    box-shadow: 0 4px 8px rgba(30, 58, 138, 0.4);
+  }
+
+  .btn-secondary {
+    @apply btn border-2 border-navy text-navy bg-transparent hover:bg-slate-50;
+  }
+
+  .btn-danger {
+    @apply btn bg-error text-white hover:bg-red-600 active:bg-red-700;
+  }
+
+  .btn-ghost {
+    @apply btn bg-transparent text-navy hover:bg-slate-100;
+  }
+
+  /* Button Sizes */
+  .btn-sm {
+    @apply text-body-sm px-3 py-2;
+  }
+
+  .btn-default {
+    @apply text-body px-4 py-3;
+  }
+
+  .btn-lg {
+    @apply text-body-lg px-6 py-4;
+  }
+
+  /* Cards */
+  .card {
+    @apply bg-white rounded-lg border border-slate-200 p-6;
+    box-shadow: var(--shadow-light);
+  }
+
+  .card-interactive {
+    @apply card transition-all duration-200 cursor-pointer;
+  }
+
+  .card-interactive:hover {
+    @apply scale-[1.02];
+    box-shadow: var(--shadow-medium);
+  }
+
+  /* Input Fields */
+  .input {
+    @apply w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-body text-text-primary transition-all duration-150;
+    height: 40px;
+    font-family: var(--font-body);
+  }
+
+  .input:focus {
+    @apply outline-none border-cyan border-2;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+  }
+
+  .input:disabled {
+    @apply bg-slate-100 text-text-muted cursor-not-allowed;
+  }
+
+  .input-error {
+    @apply border-error border-2;
+  }
+
+  .input-lg {
+    height: 48px;
+    @apply px-3 py-3;
+  }
+
+  /* Form Labels */
+  .label {
+    @apply block text-body-sm font-medium text-text-primary mb-1;
+    font-family: var(--font-heading);
+  }
+
+  .label-required::after {
+    content: ' *';
+    color: var(--color-error);
+  }
+
+  /* Form Error Text */
+  .error-text {
+    @apply text-caption text-error mt-1;
+  }
+
+  /* Navigation */
+  .nav-header {
+    @apply fixed top-0 left-0 right-0 z-50 bg-white flex items-center justify-between px-10;
+    height: 64px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-link {
+    @apply text-body text-text-primary transition-colors duration-150 relative;
+    font-family: var(--font-heading);
+  }
+
+  .nav-link:hover {
+    @apply text-navy no-underline;
+  }
+
+  .nav-link:hover::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-cyan;
+  }
+
+  .nav-link-active {
+    @apply text-navy font-semibold;
+  }
+
+  .nav-link-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-0.5 bg-cyan;
+  }
+
+  /* Tabs */
+  .tabs-container {
+    @apply flex border-b border-slate-200;
+  }
+
+  .tab {
+    @apply px-3 py-4 text-body-sm font-semibold text-text-muted transition-all duration-200 relative cursor-pointer;
+    font-family: var(--font-heading);
+  }
+
+  .tab:hover {
+    @apply text-navy bg-slate-50;
+  }
+
+  .tab-active {
+    @apply text-navy;
+  }
+
+  .tab-active::after {
+    content: '';
+    @apply absolute bottom-0 left-0 right-0 h-[3px] bg-cyan;
+  }
+
+  /* Spinner */
+  .spinner {
+    @apply inline-block rounded-full border-2 border-slate-200 animate-spin;
+    border-top-color: var(--color-cyan);
+  }
+
+  .spinner-sm {
+    @apply spinner w-6 h-6;
+  }
+
+  .spinner-lg {
+    @apply spinner w-10 h-10;
+  }
+
+  /* Toast/Notification */
+  .toast {
+    @apply fixed bottom-4 right-4 max-w-toast rounded-lg p-4 text-white z-50;
+    box-shadow: var(--shadow-medium);
+    animation: slideInRight var(--transition-normal) forwards;
+  }
+
+  .toast-success { @apply toast bg-success; }
+  .toast-error   { @apply toast bg-error; }
+  .toast-warning { @apply toast; background-color: var(--color-orange); }
+  .toast-info    { @apply toast bg-cyan; }
+
+  /* Modal */
+  .modal-overlay {
+    @apply fixed inset-0 z-50 flex items-center justify-center;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn var(--transition-normal) forwards;
+  }
+
+  .modal {
+    @apply bg-white rounded-lg p-8 relative max-w-modal w-full mx-4;
+    box-shadow: var(--shadow-large);
+    animation: modalIn var(--transition-normal) ease-out forwards;
+  }
+
+  .modal-lg {
+    @apply modal max-w-modal-lg;
+  }
+
+  /* Page Container */
+  .page-container {
+    @apply max-w-page mx-auto px-6 md:px-10 pt-20;
+  }
+
+  /* Section Spacing */
+  .section {
+    @apply py-12 md:py-16;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2 py-1 rounded-full text-caption font-semibold;
+    font-family: var(--font-heading);
+  }
+
+  .badge-navy  { @apply badge bg-navy text-white; }
+  .badge-cyan  { @apply badge bg-cyan text-white; }
+  .badge-orange { @apply badge; background: var(--color-orange); @apply text-white; }
+  .badge-green { @apply badge bg-success text-white; }
+  .badge-red   { @apply badge bg-error text-white; }
+}
+
+/* ============================================
+   Utility Layer
+   ============================================ */
+@layer utilities {
+  /* Hide scrollbar but keep scrollable */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-hidden::-webkit-scrollbar { display: none; }
+
+  /* Builder layout */
+  .builder-left {
+    @apply overflow-y-auto;
+    width: 45%;
+  }
+
+  .builder-right {
+    @apply sticky top-16 overflow-y-auto;
+    width: 55%;
+    height: calc(100vh - 64px);
+  }
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100%); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideOutRight {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(100%); }
+}
+
+/* ============================================
+   Responsive Adjustments (Mobile-first)
+   ============================================ */
+@media (max-width: 640px) {
+  .nav-header {
+    @apply px-4;
+  }
+
+  .page-container {
+    @apply px-4;
+  }
+
+  .builder-left,
+  .builder-right {
+    width: 100%;
+  }
+}
