@@ -6,7 +6,7 @@ export function Card({
 }) {
   return (
     <div 
-      className={`bg-white p-6 rounded-lg border border-border shadow-light ${hover ? 'transition-all duration-200 hover:shadow-medium hover:scale-102' : ''} ${className}`}
+      className={`bg-white p-6 rounded-lg border border-border shadow-light ${hover ? 'transition-all duration-150 hover:shadow-medium hover:scale-105' : ''} ${className}`}
       {...props}
     >
       {children}

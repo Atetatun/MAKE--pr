@@ -9,7 +9,10 @@ export function Dropdown({
   className = '',
 }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
   const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
+  const listRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -24,32 +27,70 @@ export function Dropdown({
 
   const selectedOption = options.find(opt => opt.value === value);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setIsOpen(true);
+      setHighlightedIndex(prev => (prev + 1) % options.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setIsOpen(true);
+      setHighlightedIndex(prev => (prev - 1 + options.length) % options.length);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (isOpen) {
+        onChange?.(options[highlightedIndex].value);
+        setIsOpen(false);
+      } else {
+        setIsOpen(true);
+      }
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setIsOpen(false);
+    }
+  };
+
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
       <button
+        ref={buttonRef}
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-3 py-2 border border-border rounded-lg flex items-center justify-between hover:border-cyan transition-colors bg-white"
+        onKeyDown={handleKeyDown}
+        className="w-full px-3 py-3 border border-border rounded-lg flex items-center justify-between hover:border-cyan transition-all duration-150 bg-white focus:outline-none focus:ring-2 focus:ring-cyan focus:border-cyan"
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        aria-labelledby="dropdown-label"
       >
         <span className={selectedOption ? 'text-text-primary' : 'text-text-muted'}>
           {selectedOption?.label || placeholder}
         </span>
-        <ChevronDown size={18} className={`transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown size={18} className={`transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-lg shadow-large z-50">
-          {options.map((option) => (
+        <div 
+          ref={listRef}
+          className="absolute top-full left-0 right-0 mt-2 bg-white border border-border rounded-lg shadow-large z-50"
+          role="listbox"
+        >
+          {options.map((option, index) => (
             <button
               key={option.value}
               onClick={() => {
                 onChange?.(option.value);
                 setIsOpen(false);
               }}
-              className={`w-full text-left px-3 py-2 transition-colors ${
-                value === option.value
+              onMouseEnter={() => setHighlightedIndex(index)}
+              onKeyDown={handleKeyDown}
+              className={`w-full text-left px-3 py-3 transition-all duration-150 ${
+                highlightedIndex === index
                   ? 'bg-slate-100 text-navy font-semibold'
+                  : value === option.value
+                  ? 'bg-slate-50 text-navy font-semibold'
                   : 'text-text-primary hover:bg-slate-50'
               }`}
+              role="option"
+              aria-selected={value === option.value}
             >
               {option.label}
             </button>

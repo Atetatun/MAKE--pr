@@ -2,11 +2,12 @@ export function Button({
   variant = 'primary', 
   size = 'default', 
   disabled = false,
+  loading = false,
   children,
   className = '',
   ...props 
 }) {
-  const baseStyles = 'font-semibold rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'font-semibold rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-cyan focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
   
   const variants = {
     primary: 'bg-navy text-white hover:bg-blue-900',
@@ -23,10 +24,14 @@ export function Button({
 
   return (
     <button 
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
-      disabled={disabled}
+      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className} inline-flex items-center justify-center gap-2`}
+      disabled={disabled || loading}
+      aria-busy={loading}
       {...props}
     >
+      {loading && (
+        <span className="inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
+      )}
       {children}
     </button>
   );
