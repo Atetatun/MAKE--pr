@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FileText, Github, Twitter, Linkedin } from 'lucide-react'
+import { FileText, Github } from 'lucide-react'
 
 /**
  * Footer Component
